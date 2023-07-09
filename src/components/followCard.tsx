@@ -1,5 +1,14 @@
-export function FollowCard({ username, name }: { username: string, name: string }) {
-  const src = "https://cdn-icons-png.flaticon.com/512/5556/5556468.png"
+import { useState } from "react"
+
+export function FollowCard({ username, name, isFollowing = false }: { username: string, name: string, isFollowing?: boolean }) {
+  const [follow, setfollow] = useState(isFollowing)
+  const src = `https://unavatar.io/${username}`
+  const optionText = follow ? { text: "Siguiendo", class: "is-Following" } : { text: "Seguir" }
+
+  const changeFollow = () => {
+    setfollow(!follow)
+  }
+
   return (
     <article className="tw-followCard">
       <header className="tw-followCard-header">
@@ -11,8 +20,8 @@ export function FollowCard({ username, name }: { username: string, name: string 
       </header>
 
       <aside>
-        <button className="tw-followCard-button">
-          Seguir
+        <button className={`tw-followCard-button ${optionText.class}`} onClick={changeFollow}>
+          {optionText.text}
         </button>
       </aside>
     </article>

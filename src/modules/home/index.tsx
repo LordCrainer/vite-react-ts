@@ -6,8 +6,9 @@ export function Home() {
   return (
     <>
       <Init></Init>
-      <FollowCard username="LordCrainer" name="Carlos"></FollowCard>
+      <FollowCard isFollowing username="LordCrainer" name="Carlos"></FollowCard>
       <FollowCard username="cranier" name="Andres"></FollowCard>
+      <FollowCard isFollowing username="vanper" name="Juan"></FollowCard>
     </>
   )
 }

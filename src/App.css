@@ -2,7 +2,7 @@
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
-  text-align: center;
+  /* text-align: center; */
 }
 
 .tw-followCard {
@@ -18,7 +18,7 @@
 .tw-followCard-header {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
 }
 
 .tw-followCard-info{
@@ -35,6 +35,11 @@
 
 .tw-followCard-button {
   padding: 6px 16px;
+  transition: .3s ease background-color;
+}
+.tw-followCard-button.is-Following {
+  border-color: transparent;
+  background-color: red;
 }
 
 .logo {
