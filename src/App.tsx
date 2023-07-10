@@ -8,8 +8,8 @@ function App() {
 
   return (
     <>
-      <Home></Home>
       <TicTacToe></TicTacToe>
+      <Home></Home>
     </>
   )
 }

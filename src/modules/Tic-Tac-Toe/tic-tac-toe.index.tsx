@@ -7,27 +7,22 @@ function Square({ value, onSquareClick }: { value: string, onSquareClick?: () =>
   )
 }
 
-function Board({ symbol }: { symbol: string }) {
-  const squares = Array(9).fill(null)
-  const matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
-  const getNumber = (row: number, col: number) => (row * 3) + col + 1
-  const [currentSquares, setCurrentSquares] = useState(squares)
+function Board({ matrix, playing, squares }: { matrix: number[][], playing: (v: number) => void, squares: string[] }) {
 
-  const setValue = (row: number, col: number) => {
-    const index = getNumber(row, col)
-    const newArray = [...currentSquares]
-    newArray[index] = symbol
-    setCurrentSquares(newArray)
+  const getIndexFromMatrix = (row: number, col: number) => (row * 3) + col + 1
+
+  const handleClick = (index: number) => {
+    playing(index)
   }
   return (
-    <> 
+    <>
       <div>
         {matrix.map((row, indexRow) => (
           <div key={indexRow}>
             {row.map((col, colIndex) => {
-              const number = getNumber(indexRow, colIndex)
+              const number = getIndexFromMatrix(indexRow, colIndex)
               return (
-                <Square key={number} value={squares[number]} onSquareClick={() => setValue(indexRow, colIndex)}></Square>
+                <Square key={number} value={squares[number]} onSquareClick={() => handleClick(number)}></Square>
               )
             })}
           </div>
@@ -37,24 +32,34 @@ function Board({ symbol }: { symbol: string }) {
   )
 }
 
-const Player = ({ player }: { player: string }) => {
+const Player = ({ name, symbol }: { name: string, symbol: string }) => {
   return (
     <div>
-      Siguiente Jugador: {player}
+      Siguiente Jugador: {name} {symbol}
     </div>
   )
 }
 
 export function TicTacToe() {
-  const players = [{ name: "Carlos" }, { name: "Kenya" }]
-  const symbols = ["x", "o"]
   const [turn, setTurn] = useState(0)
-  const currentPlayer = { name: players[turn], symbol: symbols[turn] }
+  const matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+  const matrixsElements = matrix.flat().length
+
+  const [history, setHistory] = useState(Array(matrixsElements).fill(null))
+
+  const players = [{ name: "Carlos", symbol: "x" }, { name: "Kenya", symbol: "o" }]
+  const { name, symbol } = players[turn]
+
+  const handlePlay = (i: number) => {
+    const newArray = [...history]
+    newArray[i] = symbol
+    setHistory(newArray)
+  }
 
   return (
     <div>
-      <Player player={currentPlayer.symbol}></Player>
-      <Board symbol={currentPlayer.symbol}></Board>
+      <Player name={name} symbol={symbol}></Player>
+      <Board squares={history} playing={handlePlay} matrix={matrix}></Board>
     </div>
 
   )
