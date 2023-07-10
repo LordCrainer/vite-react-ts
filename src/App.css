@@ -21,7 +21,7 @@
   gap: 6px;
 }
 
-.tw-followCard-info{
+.tw-followCard-info {
   display: flex;
   flex-direction: column;
 }
@@ -37,9 +37,11 @@
   padding: 6px 16px;
   transition: .3s ease background-color;
 }
+
 .tw-followCard-button.is-Following {
   border-color: transparent;
-  background-color: red;
+  background-color: rgba(255, 0, 0, .1);
+  border: 1px solid red;
 }
 
 .logo {
@@ -48,9 +50,11 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -59,6 +63,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
